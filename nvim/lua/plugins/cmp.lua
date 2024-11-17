@@ -1,3 +1,4 @@
+
 return {
   -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
@@ -25,10 +26,12 @@ return {
       local cmp = require("cmp")
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<CR>"] = cmp.config.disable,
-        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-j>"] = cmp.mapping(function(fallback) end, { "i", "s" }),
+        ["<CR>"] = cmp.config.disable, -- Disable <CR> for completion
+        ["<Tab>"] = cmp.mapping.confirm({ select = true }), -- Confirm selection with <Tab>
+        ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }), -- Scroll down suggestions with <C-j>
+        ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }), -- Scroll up suggestions with <C-k>
       })
     end,
   },
 }
+
